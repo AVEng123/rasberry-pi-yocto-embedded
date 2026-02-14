@@ -35,3 +35,7 @@ Add custom C++/Python applications.
 Create a custom meta-layer for specialized hardware drivers.
 
 Set up a cross-compilation SDK.
+
+How to know what pi we have?? -----> in Pi4
+The Raspberry Pi 4 uses the Cortex-A72 CPU. While it can run 32-bit code, using 64-bit (ARMv8)
+

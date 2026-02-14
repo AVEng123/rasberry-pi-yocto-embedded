@@ -527,3 +527,228 @@ From https://github.com/AVEng123/rasberry-pi-yocto-embedded
 shubham@shubham-VirtualBox:~/Documents/yocto$ 
 
 
+
+££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi$ source oe-init-build-env
+You had no conf/local.conf file. This configuration file has therefore been
+created for you from /home/shubham/Documents/yocto/poky-rpi/meta-poky/conf/templates/default/local.conf.sample
+You may wish to edit it to, for example, select a different MACHINE (target
+hardware).
+
+You had no conf/bblayers.conf file. This configuration file has therefore been
+created for you from /home/shubham/Documents/yocto/poky-rpi/meta-poky/conf/templates/default/bblayers.conf.sample
+To add additional metadata layers into your configuration please add entries
+to conf/bblayers.conf.
+
+The Yocto Project has extensive documentation about OE including a reference
+manual which can be found at:
+    https://docs.yoctoproject.org
+
+For more information about OpenEmbedded see the website:
+    https://www.openembedded.org/
+
+This is the default build configuration for the Poky reference distribution.
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86-64'.
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+You had no /home/shubham/Documents/yocto/poky-rpi/.vscode configuration.
+These configuration files have therefore been created for you.
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+
+
+£££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ bitbake-layers add-layer ../meta-raspberrypi
+NOTE: Starting bitbake server...
+ERROR: The following required tools (as specified by HOSTTOOLS) appear to be unavailable in PATH, please install them in order to proceed:
+  lz4c
+ERROR: The following required tools (as specified by HOSTTOOLS) appear to be unavailable in PATH, please install them in order to proceed:
+  lz4c
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ sudo apt-get update
+[sudo] password for shubham: 
+Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
+Hit:2 http://in.archive.ubuntu.com/ubuntu noble InRelease
+Hit:3 http://in.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:4 http://in.archive.ubuntu.com/ubuntu noble-backports InRelease
+Reading package lists... Done
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ sudo apt-get install liblz4-tool zstd libssl-dev
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+zstd is already the newest version (1.5.5+dfsg2-2build1.1).
+The following packages were automatically installed and are no longer required:
+  libgl1-amber-dri libglapi-mesa
+Use 'sudo apt autoremove' to remove them.
+Suggested packages:
+  libssl-doc
+The following NEW packages will be installed:
+  liblz4-tool libssl-dev lz4
+0 upgraded, 3 newly installed, 0 to remove and 262 not upgraded.
+Need to get 2,503 kB of archives.
+After this operation, 13.6 MB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu noble-updates/main amd64 libssl-dev amd64 3.0.13-0ubuntu3.7 [2,407 kB]
+Get:2 http://in.archive.ubuntu.com/ubuntu noble-updates/universe amd64 lz4 amd64 1.9.4-1build1.1 [93.8 kB]
+Get:3 http://in.archive.ubuntu.com/ubuntu noble-updates/universe amd64 liblz4-tool all 1.9.4-1build1.1 [2,484 B]
+Fetched 2,503 kB in 4s (568 kB/s)       
+Selecting previously unselected package libssl-dev:amd64.
+(Reading database ... 214841 files and directories currently installed.)
+Preparing to unpack .../libssl-dev_3.0.13-0ubuntu3.7_amd64.deb ...
+Unpacking libssl-dev:amd64 (3.0.13-0ubuntu3.7) ...
+Selecting previously unselected package lz4.
+Preparing to unpack .../lz4_1.9.4-1build1.1_amd64.deb ...
+Unpacking lz4 (1.9.4-1build1.1) ...
+Selecting previously unselected package liblz4-tool.
+Preparing to unpack .../liblz4-tool_1.9.4-1build1.1_all.deb ...
+Unpacking liblz4-tool (1.9.4-1build1.1) ...
+Setting up libssl-dev:amd64 (3.0.13-0ubuntu3.7) ...
+Setting up lz4 (1.9.4-1build1.1) ...
+Setting up liblz4-tool (1.9.4-1build1.1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ bitbake-layers add-layer ../meta-raspberrypi
+NOTE: Starting bitbake server...
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ cat conf/bblayers.conf 
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
+
+BBPATH = "${TOPDIR}"
+BBFILES ?= ""
+
+BBLAYERS ?= " \
+  /home/shubham/Documents/yocto/poky-rpi/meta \
+  /home/shubham/Documents/yocto/poky-rpi/meta-poky \
+  /home/shubham/Documents/yocto/poky-rpi/meta-yocto-bsp \
+  /home/shubham/Documents/yocto/poky-rpi/meta-raspberrypi \
+  "
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+£££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££
+
+Add changes to conf/local.conf
+Do changes in local.conf:
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ cd conf/
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build/conf$ ls
+bblayers.conf  conf-notes.txt  conf-summary.txt  local.conf  templateconf.cfg
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build/conf$ 
+
+My Raspberry Pi 4 Settings
+MACHINE = "raspberrypi4-64"
+INIT_MANAGER = "systemd"
+LICENSE_FLAGS_ACCEPTED = "synaptics-killswitch"
+
+Enable UART so you can use a Serial Console cable
+ENABLE_UART = "1"
+
+# Enable GPU support and hardware acceleration
+DISTRO_FEATURES:append = " wayland opengl"
+
+# Force 1080p for your Zebronics Monitor
+APPEND:append = " video=HDMI-A-1:1920x1080@60D"
+
+£££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ bitbake core-image-weston
+ERROR: User namespaces are not usable by BitBake, possibly due to AppArmor.
+See https://discourse.ubuntu.com/t/ubuntu-24-04-lts-noble-numbat-release-notes/39890#unprivileged-user-namespace-restrictions for more information.
+
+Summary: There was 1 ERROR message, returning a non-zero exit code.
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+Ubuntu 24.04 introduced a new security feature that restricts "unprivileged user namespaces." While this is meant to protect the kernel, it blocks BitBake from using essential isolation tools it needs to build your image.
+
+Yocto uses "User Namespaces" to create a "sandbox" for certain build tasks (like fakeroot). This ensures that if a build script goes rogue, it can't mess with your actual host system files. Ubuntu 24.04 sees this "sandboxing" attempt as a potential security risk and kills the process by default.
+
+Bash
+echo 'kernel.apparmor_restrict_unprivileged_userns = 0' | sudo tee /etc/sysctl.d/60-apparmor-namespace.conf
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ echo 'kernel.apparmor_restrict_unprivileged_userns = 0' | sudo tee /etc/sysctl.d/60-apparmor-namespace.conf
+[sudo] password for shubham: 
+kernel.apparmor_restrict_unprivileged_userns = 0
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ sudo sysctl --system
+* Applying /usr/lib/sysctl.d/10-apparmor.conf ...
+* Applying /etc/sysctl.d/10-console-messages.conf ...
+* Applying /etc/sysctl.d/10-ipv6-privacy.conf ...
+* Applying /etc/sysctl.d/10-kernel-hardening.conf ...
+* Applying /etc/sysctl.d/10-magic-sysrq.conf ...
+* Applying /etc/sysctl.d/10-map-count.conf ...
+* Applying /etc/sysctl.d/10-network-security.conf ...
+* Applying /etc/sysctl.d/10-ptrace.conf ...
+* Applying /etc/sysctl.d/10-zeropage.conf ...
+* Applying /usr/lib/sysctl.d/30-tracker.conf ...
+* Applying /usr/lib/sysctl.d/50-bubblewrap.conf ...
+* Applying /usr/lib/sysctl.d/50-pid-max.conf ...
+* Applying /etc/sysctl.d/60-apparmor-namespace.conf ...
+* Applying /usr/lib/sysctl.d/99-protect-links.conf ...
+* Applying /etc/sysctl.d/99-sysctl.conf ...
+* Applying /etc/sysctl.conf ...
+kernel.apparmor_restrict_unprivileged_userns = 1
+kernel.printk = 4 4 1 7
+net.ipv6.conf.all.use_tempaddr = 2
+net.ipv6.conf.default.use_tempaddr = 2
+kernel.kptr_restrict = 1
+kernel.sysrq = 176
+vm.max_map_count = 1048576
+net.ipv4.conf.default.rp_filter = 2
+net.ipv4.conf.all.rp_filter = 2
+kernel.yama.ptrace_scope = 1
+vm.mmap_min_addr = 65536
+fs.inotify.max_user_watches = 65536
+kernel.unprivileged_userns_clone = 1
+kernel.pid_max = 4194304
+kernel.apparmor_restrict_unprivileged_userns = 0
+fs.protected_fifos = 1
+fs.protected_hardlinks = 1
+fs.protected_regular = 2
+fs.protected_symlinks = 1
+
+£££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££
+
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ bitbake core-image-weston
+Loading cache: 100% |                                                                                                                                   | ETA:  --:--:--
+Loaded 0 entries from dependency cache.
+Parsing recipes: 100% |##################################################################################################################################| Time: 0:00:56
+Parsing of 961 .bb files complete (0 cached, 961 parsed). 1923 targets, 73 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing RPROVIDES 'weston-xwayland' (but /home/shubham/Documents/yocto/poky-rpi/meta/recipes-graphics/images/core-image-weston.bb RDEPENDS on or otherwise requires it)
+weston RPROVIDES weston-xwayland but was skipped: missing required distro feature 'pam' (not in DISTRO_FEATURES)
+NOTE: Runtime target 'weston-xwayland' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['weston-xwayland']
+ERROR: Required build target 'core-image-weston' has no buildable providers.
+Missing or unbuildable dependency chain was: ['core-image-weston', 'weston-xwayland']
+
+Summary: There were 2 ERROR messages, returning a non-zero exit code.
+shubham@shubham-VirtualBox:~/Documents/yocto/poky-rpi/build$ 
+
+Fix is: DISTRO_FEATURES:append = " wayland opengl pam"
+
+The issue is that you are using systemd as your init manager. In modern Yocto releases (like Kirkstone or Scarthgap), if you use systemd, the Weston compositor (specifically the weston-xwayland component) requires PAM (Pluggable Authentication Modules) to handle user sessions and security.
+
+Since pam isn't in your DISTRO_FEATURES by default, BitBake refuses to build Weston.
+
+££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££
+
