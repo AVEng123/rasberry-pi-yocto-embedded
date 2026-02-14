@@ -1,0 +1,27 @@
+Link: https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html
+
+Follow the steps below:
+
+Download the source code:
+
+git clone -b scarthgap https://git.yoctoproject.org/poky poky-rpi
+cd poky-rpi
+git clone -b scarthgap https://github.com/agherzan/meta-rasp...
+
+Initialize the build environment:
+
+source oe-init-build-env
+
+Add BSP layer meta-raspberrypi to conf/bblayers.conf:
+
+bitbake-layers add-layer ../meta-raspberrypi
+
+Append the following 3 lines to the end of conf/local.conf:
+
+MACHINE = "raspberrypi5"
+INIT_MANAGER = "systemd"
+LICENSE_FLAGS_ACCEPTED = "synaptics-killswitch"
+
+Build a basic image for Raspberry Pi 5:
+
+bitbake core-image-base

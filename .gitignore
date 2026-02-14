@@ -13,6 +13,14 @@ bin-release/
 *.ipa
 *.apk
 
+# Yocto/OE specific
+build/
+downloads/
+sstate-cache/
+tmp/
+*.pyc
+poky-rpi/
+
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
